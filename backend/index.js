@@ -15,21 +15,39 @@ const csv = require("csvtojson");
 const cors = require("cors");
 var _ = require("lodash");
 const { json } = require("express");
+const app=express();
 
-mongoose
-  .connect(
-    process.env.DATABASE_URL ||
-      "mongodb+srv://10xacademy:10xacademy@cluster0.kstzf.mongodb.net/contactsmanager?retryWrites=true&w=majority"
-  )
-  .then(() => {
-    console.log("Connected to DB");
-  });
-const app = express();
+// mongoose
+//   .connect(
+//     process.env.DATABASE_URL ||
+//       "mongodb+srv://10xacademy:10xacademy@cluster0.kstzf.mongodb.net/contactsmanager?retryWrites=true&w=majority"
+//   )
+//   .then(() => {
+//     console.log("Connected to DB");
+//   });
+// mongoose
+//   .connect(
+//     process.env.DATABASE_URL ||
+//       "mongodb+srv://SoumyashreeBaral:mamba1234@instaclone.807mbwx.mongodb.net/contacts?retryWrites=true&w=majority"
+//   )
+//   .then(() => {
+//     console.log("Connected to DB");
+//   });
+
+
+
+mongoose.connect("mongodb://localhost/contusers", () => {
+    console.log("connected to db");
+}, (err) => {
+    console.log(err);
+})
+
 const unProtectedRoutes = ["/login", "/signup"];
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use((req, res, next) => {
+  
   if (unProtectedRoutes.includes(req.url)) {
     next();
   } else {
@@ -66,6 +84,7 @@ var csvuploads = multer({ storage: storage });
 app.use(express.static(path.resolve(__dirname, "public")));
 
 app.post("/signup", async (req, res) => {
+  console.log(req.body)
   if (await checkExistingUser(req.body.mailid)) {
     res.status(400).send("EmailID exists. Please try with different Email");
   } else {
@@ -175,10 +194,12 @@ app.get("/username", (req, res) => {
   res.send(username);
 });
 
-app.listen(process.env.PORT || 5000, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Server Started");
-  }
-});
+
+const port = process.env.PORT || 5000
+app.listen(5000, (err) => {
+    if (err) {
+        console.log("error")
+    } else {
+        console.log(`app is running on ${port} `)
+    }
+})

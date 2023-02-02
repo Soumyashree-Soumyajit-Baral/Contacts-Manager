@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/contactsmanager.png";
-
+// url: "https://contacts-manager-server.herokuapp.com/signup",
+// url: "http://localhost:5000/signup",
 import "./signup.css";
 const Signup = () => {
   const [signupState, setSignupState] = useState({});
@@ -10,7 +11,7 @@ const Signup = () => {
   const handleUserAdd = () => {
     if (signupState.password === signupState.cpassword) {
       axios({
-        url: "https://handlecontacts-backend.herokuapp.com/signup",
+        url: "http://localhost:5000/signup",
         method: "POST",
         headers: {},
         data: { mailid: signupState.mailid, password: signupState.password },

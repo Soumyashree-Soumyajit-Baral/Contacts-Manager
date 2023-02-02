@@ -21,7 +21,8 @@ export default function Import({ setimporting }) {
       data.append("file", file);
       axios({
         method: "POST",
-        url: "https://handlecontacts-backend.herokuapp.com/post",
+        url: "http://localhost:5000/post",
+        // url: "https://contacts-manager-server.herokuapp.com/post",
         data: data,
         headers: {
           authorization: token,

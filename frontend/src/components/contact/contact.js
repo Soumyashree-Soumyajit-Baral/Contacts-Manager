@@ -49,7 +49,8 @@ const Contact = () => {
   useEffect(() => {
     let token = localStorage.getItem("Authorization");
     axios({
-      url: "https://handlecontacts-backend.herokuapp.com/username",
+      // url: "https://contacts-manager-server.herokuapp.com/username",
+      url: "http://localhost:5000/username",
       method: "GET",
       headers: {
         authorization: token,
@@ -62,7 +63,7 @@ const Contact = () => {
   useEffect(() => {
     let token = localStorage.getItem("Authorization");
     axios({
-      url: "https://handlecontacts-backend.herokuapp.com/",
+      url: "http://localhost:5000",
       method: "GET",
       headers: {
         authorization: token,
@@ -81,6 +82,7 @@ const Contact = () => {
       setdeleting(true);
     }
   };
+  
   const deletebyid = () => {
     let data = [];
     let token = localStorage.getItem("Authorization");
@@ -91,7 +93,7 @@ const Contact = () => {
     });
     axios({
       method: "DELETE",
-      url: "https://handlecontacts-backend.herokuapp.com/delete",
+      url: "http://localhost:5000/delete",
       headers: {
         authorization: token,
       },
@@ -110,7 +112,7 @@ const Contact = () => {
     let token = localStorage.getItem("Authorization");
     axios({
       method: "DELETE",
-      url: "https://handlecontacts-backend.herokuapp.com/delete",
+      url: "http://localhost:5000/delete",
       headers: {
         authorization: token,
       },
